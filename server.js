@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 // Cors for cross origin allowance
 const cors = require('cors');
+const { request } = require('express');
 app.use(cors());
 // Initialize the main project folder
 app.use(express.static('website'));
@@ -30,6 +31,12 @@ function sendData(req, res){
     res.send(projectData);
 }
 // POST method route
-app.post('/', function (req, res) {
-    res.send('POST received')
-})
+app.post('/add', function (req, res) {
+    projectData={
+        temp:req.body.temp,
+        date:reqbody.date,
+        content:req.body.content
+    };
+    res.send(projectData);
+});
+
