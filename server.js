@@ -28,24 +28,27 @@ const port =5500;
 const server = app.listen(port, listening);
 function listening(){
     console.log("server running");
-    console.log(`running on localhost: ${port}`);
+    console.log(`running on localhost ${port}`);
 }
 
 app.get("/all", sendData);
 function sendData(request, response){
-    response.send(projectData);
-    console.log(projectData);
+    response.status(200).send(projectData);
+    projectData=[];
 }
 // POST method route
 let alldata =[];
-app.post('/add', function (request, response) {
+app.post('/add', addData);
+function addData(request, response){
     console.log(request.body);
     newprojectData={
         temp:request.body.temp,
         date:request.body.date,
         feeling:request.body.content
     };
-    response.send(projectData);
+    
     alldata.push(newprojectData);
-});
-
+    projectData =alldata;
+    response.send(projectData).status(200);
+    console.log(projectData);
+}
